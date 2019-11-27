@@ -2,10 +2,10 @@ package game;
 
 public class Player {
 	
-	int player_id;
-	String player_name;
-	int balance;
-	int curr_position;
+	private int player_id;
+	private String player_name;
+	private int balance;
+	private int curr_position;
 	
 	public Player(String name) {
 		this.player_name = name;
@@ -14,5 +14,6 @@ public class Player {
 	public int roll_dice() {
 		return 0;
 	}
+	
 	
 }

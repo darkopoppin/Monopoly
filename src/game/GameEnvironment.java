@@ -5,8 +5,8 @@ import java.util.List;
 
 public class GameEnvironment {
 
-	Board board;
-	List <Player> player_array;
+	private Board board;
+	private List <Player> player_array;
 	
 	public GameEnvironment (Player host) { // called when a player create a server
 		//initialize server here
