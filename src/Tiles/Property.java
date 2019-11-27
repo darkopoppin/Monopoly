@@ -14,6 +14,9 @@ public class Property extends LandTile{
 
     public void Upgrade(){
         // Increase house count
+        if(houses < 5){
+            houses++;
+        }
         houses ++;
         
     }
@@ -22,32 +25,21 @@ public class Property extends LandTile{
         // Rent modifier given the houses
         if(houses != 0){
         int rent = super.getRent();
-        } else{
-            if(colourGroup == "Purple"){
-
-            }
-            else if(colourGroup == "Teal"){
-
-            }
-            else if(colourGroup == "Pink"){
-
-            }
-            else if(colourGroup == "Orange"){
-
-            }
-            else if(colourGroup == "Red"){
-
-            }
-            else if(colourGroup == "Yellow"){
-
-            }
-            else if(colourGroup == "Green"){
-
-            }
-            else if(colourGroup == "Blue"){
-                
-            }
-
+        } 
+        else if(houses == 1){
+            rent = rent*5;
+        }
+        else if(houses == 2){
+            rent = rent*15;
+        }
+        else if(houses == 3){
+            rent = rent*35;
+        }
+        else if(houses == 4){
+            rent = rent*42;
+        }
+        else if(houses == 5){
+            rent = rent*50;
         }
         return rent;
     }
