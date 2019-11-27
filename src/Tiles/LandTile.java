@@ -1,7 +1,7 @@
 package Tiles;
 import game.Player;
 
-public abstract class LandTile {
+public abstract class LandTile<Tile> {
 	final int ID;
 	String name;
 	int value;
@@ -43,4 +43,10 @@ public abstract class LandTile {
 	public Player getOwner(){
 		return owner;
 	}
+	
+	public void setMortgageStatus() {
+		
+	}
+	
+	
 }
