@@ -5,14 +5,14 @@ public class Property extends LandTile{
     private int houses;
     private String colourGroup;
 
-    public Property(int ID, String name, int value, int rent, int houses, String colourGroup){
+    public Property(int ID, String name, int value, int rent, String colourGroup){
         super(ID, name, value, rent);
-        this.houses = houses;
+        this.houses = 0;
         this.colourGroup = colourGroup;
 
     }
 
-    public void Upgrade(){
+    public void upgrade(){
         // Increase house count
         if(houses < 5){
             houses++;

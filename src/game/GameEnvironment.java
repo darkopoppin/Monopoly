@@ -1,5 +1,6 @@
 package game;
 
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,13 @@ public class GameEnvironment {
 		
 	}
 	public Board makeBoard() {
-		Board board = new Board(); // Pass the number players
+		Board board = null;
+		try {
+			board = new Board(); // Pass the number of players
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return board;
 	}
 	
