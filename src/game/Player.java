@@ -67,11 +67,12 @@ public class Player {
 			currPosition = currPosition - 40;
 
 		}
-		if(dice1 == dice2){
+		
+		if(dice1 == dice2)
 			return true;
-		} else {return false;}
+		else 
+			return false;
 
-		return this.currPosition;
 
 	}
 
@@ -132,6 +133,10 @@ public class Player {
 
 	public String getPlayerName(){
 		return playerName;
+	}
+	
+	public int getPosition() {
+		return this.currPosition;
 	}
 
 }

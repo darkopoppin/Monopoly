@@ -21,12 +21,12 @@ public class GameEnvironment {
 	public void start_game() { // when player click start game
 		this.board = makeBoard(); //initialize board
 		
-		int position;
-		Tile tile;
+
 		while (this.player_array.size() != 1) { //while there are more than 1 player keep the game running
 			for (Player player : this.player_array) { //each player turn
-				position = player.rollDice();
-				tile = this.board.getTile(position);
+				player.rollDice();
+				int position = player.getPosition();
+				LandTile tile = (LandTile) this.board.getPosition(position);
 				player.action(tile);
 			}
 		}
