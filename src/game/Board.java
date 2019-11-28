@@ -27,8 +27,13 @@ public class Board {
 		
 		while (input.hasNextLine()) {
 			String [] tile = input.nextLine().split(",");
-			
-			if (tile.length == 5) { // if the tile has 5 tokens its a property
+			if (tile.length == 1){
+				id = Integer.parseInt(tile[0]);
+				if (id == 30){
+					initTile = new CornerTile(id);
+				}
+			}
+			else if (tile.length == 5) { // if the tile has 5 tokens its a property
 				id = Integer.parseInt(tile[0]);
 				name = tile[1];
 				value = Integer.parseInt(tile[2]);
@@ -51,6 +56,8 @@ public class Board {
 			}
 			this.tiles.add(initTile);
 		}
+
+
 		
 	}
 }
