@@ -42,6 +42,10 @@ public abstract class LandTile extends Tile {
 	public Player getOwner(){
 		return owner;
 	}
+
+	public void setOwner(Player playerName){
+		owner = playerName;
+	}
 	
 	public void setMortgageStatus() {
 		
