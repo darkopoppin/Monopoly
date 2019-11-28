@@ -12,11 +12,12 @@ public class Board {
 	
 	public Board () throws FileNotFoundException {
 		this.tiles = new ArrayList<Tile>();
-		makeTiles();
+		makeLandTiles();
+		makePoolTiles();
 		
 	}
 	
-	public void makeTiles() throws FileNotFoundException {
+	public void makeLandTiles() throws FileNotFoundException {
 		Scanner input = new Scanner(new File("./resources/LandTile.txt"));
 		int id;
 		String name;
@@ -50,6 +51,9 @@ public class Board {
 			}
 			this.tiles.add(initTile);
 		}
-		
 	}
-}
+	
+	public void makePoolTiles() throws FileNotFoundException {
+			
+		}
+	}

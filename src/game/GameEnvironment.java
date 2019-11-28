@@ -18,6 +18,12 @@ public class GameEnvironment {
 	public void start_game() { // when player click start game
 		this.board = makeBoard(); //initialize board
 		
+		while (this.player_array.size() != 1) { //while there are more than 1 player keep the game running
+			for (Player player : this.player_array) { //each player turn
+				player.rollDice();
+			}
+		}
+		
 	}
 	public Board makeBoard() {
 		Board board = null;
