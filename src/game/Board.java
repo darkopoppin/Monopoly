@@ -13,6 +13,7 @@ public class Board {
 	public Board () throws FileNotFoundException {
 		this.tiles = new ArrayList<Tile>();
 		makeTiles();
+		PoolTile pool = new PoolTile(12);
 		
 	}
 	

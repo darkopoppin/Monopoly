@@ -1,0 +1,7 @@
+Advance to Go
+Advance to Nearest Station
+Advance to Nearest Utility
+Go Back 3 Spaces
+Go Forward 3 Spaces
+Get Out of Jail Card
+Go to Jail Card
