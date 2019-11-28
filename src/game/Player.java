@@ -22,10 +22,6 @@ public class Player {
 		this.mortgageOwed = mortgageOwed;
 		this.propertyOwned = new HashSet<>();
 	}
-	
-	public int roll_dice() {
-		return 0;
-	}
 
 	public void action(){
 
@@ -56,6 +52,7 @@ public class Player {
 		if(balance >= p.getValue()){
 			setBalance(balance - p.getValue());
 			propertyOwned.add(p);
+			p.setOwner(this);
 		} else {
 			// DIsplay in the UI that there is insufficient funds
 			System.out.println("Insufficient funds");
@@ -64,9 +61,17 @@ public class Player {
 
 	}
 
-	public void payRent(){
-
+	public void payRent(LandTile payup){
+		int rent = payup.getRent();
+		if(balance > rent){
+			// pay the rent
+		}
+		else if(rent > balance){
+			// Force the user to mortgage owned properties
+			if 
+		}
 	}
+
 	public void mortgage(){
 
 	}

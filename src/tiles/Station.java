@@ -1,5 +1,5 @@
 package tiles;
-
+import game.Player;
 public class Station extends LandTile{
 
     public Station(int ID, String name, int value, int rent){
