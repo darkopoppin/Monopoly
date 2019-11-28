@@ -13,11 +13,12 @@ public class Property extends LandTile{
     }
 
     public void upgrade(){
-        // Increase house count
+        // Check of the player owns all properties in the same colourGroup => Increase house count
         if(houses < 5){
+            
+            // Check the difference of number of houses between all properties in the same group is < 2
             houses++;
-        }
-        houses ++;
+        };
         
     }
 
@@ -45,8 +46,6 @@ public class Property extends LandTile{
     }
 
     public String getColourGroup(){
-        String colourGroup = null;
-
         return colourGroup;
     }
 
