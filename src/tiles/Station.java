@@ -6,7 +6,7 @@ public class Station extends LandTile{
         super(ID, name, value, rent);
     }
 
-    public int calculateRent(){
+    /*public int calculateRent(){
         int count = 0;
         for(int property : propertyOwned){
             if(true){
@@ -14,5 +14,5 @@ public class Station extends LandTile{
             }
         return count*rent;
         }
-    }
+    }*/
 }
