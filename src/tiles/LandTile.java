@@ -51,5 +51,9 @@ public abstract class LandTile extends Tile {
 		
 	}
 	
+	public String getClassName() {
+		return "LandTile";
+	}
+	
 	
 }

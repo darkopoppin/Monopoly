@@ -2,16 +2,18 @@ package game;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import tiles.*;
 
 public class Board {
-	private List <Tile> tiles;
+	private Map<Integer, Tile> tiles;
 	
 	public Board () throws FileNotFoundException {
-		this.tiles = new ArrayList<Tile>();
+		this.tiles = new HashMap<>();
 		makeLandTiles();
 		makePoolTiles();
 		
@@ -23,7 +25,7 @@ public class Board {
 		String name;
 		int value;
 		int rent;
-		Tile initTile = null;
+		LandTile initTile = null;
 		
 		while (input.hasNextLine()) {
 			String [] tile = input.nextLine().split(",");
@@ -34,6 +36,7 @@ public class Board {
 				value = Integer.parseInt(tile[2]);
 				rent = Integer.parseInt(tile[3]);
 				initTile = new Property(id, name, value, rent, tile[4]);
+				this.tiles.put(id, initTile);
 			}
 			else if (tile.length == 4 && tile[1].contains("Station")){ //if the tile has 4 tokens its a station
 				id = Integer.parseInt(tile[0]);
@@ -41,6 +44,7 @@ public class Board {
 				value = Integer.parseInt(tile[2]);
 				rent = Integer.parseInt(tile[3]);
 				initTile = new Station(id, name, value, rent);
+				this.tiles.put(id, initTile);
 			}
 			else if (tile.length == 4 && tile[1].contains("Company")) {
 				id = Integer.parseInt(tile[0]);
@@ -48,12 +52,16 @@ public class Board {
 				value = Integer.parseInt(tile[2]);
 				rent = Integer.parseInt(tile[3]);
 				initTile = new Utility(id, name, value, rent);
+				this.tiles.put(id, initTile);
 			}
-			this.tiles.add(initTile);
 		}
 	}
 	
 	public void makePoolTiles() throws FileNotFoundException {
 			
 		}
+	
+	public Tile getTile(int index) {
+		return this.tiles.get(index);
 	}
+}

@@ -1,5 +1,5 @@
 package tiles;
-
+import game.Player;
 public class Station extends LandTile{
 
     public Station(int ID, String name, int value, int rent){
@@ -8,11 +8,10 @@ public class Station extends LandTile{
 
     /*public int calculateRent(){
         int count = 0;
-        for(int property : propertyOwned){
-            if(true){
+        for(int index : propertyOwned){
+            if(contains(lst, index)){
                 count++;
             }
-        return count*rent;
         }
     }*/
 }
