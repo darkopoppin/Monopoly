@@ -11,14 +11,14 @@ import tiles.*;
 
 public class Board {
 	private Map<Integer, Tile> tiles;
-	
+
 	public Board () throws FileNotFoundException {
 		this.tiles = new HashMap<>();
 		makeLandTiles();
 		makePoolTiles();
-		
+
 	}
-	
+
 	public void makeLandTiles() throws FileNotFoundException {
 		Scanner input = new Scanner(new File("./resources/LandTile.txt"));
 		int id;
@@ -26,11 +26,16 @@ public class Board {
 		int value;
 		int rent;
 		LandTile initTile = null;
-		
+
 		while (input.hasNextLine()) {
 			String [] tile = input.nextLine().split(",");
-			
-			if (tile.length == 5) { // if the tile has 5 tokens its a property
+			if (tile.length == 1){
+				id = Integer.parseInt(tile[0]);
+				if (id == 30){
+					initTile = new CornerTile(id);
+				}
+			}
+			else if (tile.length == 5) { // if the tile has 5 tokens its a property
 				id = Integer.parseInt(tile[0]);
 				name = tile[1];
 				value = Integer.parseInt(tile[2]);
@@ -56,11 +61,11 @@ public class Board {
 			}
 		}
 	}
-	
+
 	public void makePoolTiles() throws FileNotFoundException {
-			
+
 		}
-	
+
 	public Tile getTile(int index) {
 		return this.tiles.get(index);
 	}

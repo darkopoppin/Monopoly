@@ -9,23 +9,25 @@ import java.util.Random;
 
 
 public class Player {
-	
+
 	private int playerId;
 	private String playerName;
 	private int balance;
 	private int currPosition;
 	private int mortgageOwed;
-	private HashSet propertyOwned;
-	
+	private HashSet<LandTile> propertyOwned;
+	private Boolean inJail;
+
 	public Player(String playerName) {
 		//this.playerId = player;
 		this.playerName = playerName;
 		this.balance = 1500;
-		this.propertyOwned = new HashSet<LandTile>();
+		this.propertyOwned = new HashSet<>();
+		this.inJail = false;
 	}
 	/*
 	 * action for landTile object
-	 * 
+	 *
 	 */
 	public void action(Tile tile){
 		switch(tile.getClassName()) {
@@ -37,33 +39,40 @@ public class Player {
 				this.payRent(landTile);
 		}
 	}
-	
+
 	public void action(PoolTile poolTile) {
-		
+
 	}
-	
+
 	public void action(CornerTile cornerTile) {
-		
+
 	}
-	
+
 	public void auction(){
 		// Auction between players
 		// increasing bid prices
 	}
-	
-	public int rollDice(){
+
+	public Boolean rollDice(){
 		// Some random number between 2 - 12
-		Random r = new Random();		
-		int roll =  r.nextInt((12 - 2) + 1) + 2;
-		currPosition = currPosition + roll;
-		
+		Random r = new Random();
+		int dice1 =  r.nextInt((6 - 2) + 1) + 2;
+		int dice2 =  r.nextInt((6 - 2) + 1) + 2;
+
+
+		currPosition = currPosition + dice1 + dice2;
+
 		if(currPosition >= 40){
 			balance = balance + 200;
 			currPosition = currPosition - 40;
+
 		}
-		
+		if(dice1 == dice2){
+			return true;
+		} else {return false;}
+
 		return this.currPosition;
-		
+
 	}
 
 	public void setUpTrade(){
@@ -85,7 +94,7 @@ public class Player {
 			// Display in the UI that there is insufficient funds
 			// Open option to mortgage properties
 		}
-		
+
 
 	}
 
@@ -99,8 +108,8 @@ public class Player {
 				// Force the user to mortgage owned properties
 				// Make the player pick which properties to mortgage
 				// Automatically pay rent when the player finishes mortgaging properties
-				// 
-			
+				//
+
 				}
 			}
 

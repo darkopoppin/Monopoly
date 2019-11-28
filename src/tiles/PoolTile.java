@@ -2,25 +2,52 @@ package tiles;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
+
 public class PoolTile extends Tile{
-	private HashMap <Integer, String> pool;
-	private final File INPUT;
-	
-	public PoolTile(int id) {
+
+	private String tile;
+	private ArrayList <String> pool;
+
+	public PoolTile(int id) throws FileNotFoundException{
 		super(id);
-		this.INPUT = new File("./resources/PoolTile.txt");
-		this.pool = new HashMap<>();
-	}
-	
-	public void initializePool() throws FileNotFoundException {
-		Scanner input = new Scanner(this.INPUT);
-		while (input.hasNextLine()) {
-			String [] tile = input.nextLine().split(",");
-			this.pool.put(Integer.parseInt(tile[1]), tile[0]);
+		if(id==2 || id==17 || id ==33){
+			this.pool = new ArrayList<>();
+			makeChest();
+		}
+		else{
+			this.pool = new ArrayList<>();
+			makeChance();
 		}
 	}
 
+	public void makeChest() throws FileNotFoundException{
+		Scanner input = new Scanner(new File("./resources/ChestCards.txt"));
+
+		while(input.hasNextLine()){
+			tile = input.nextLine();
+			pool.add(tile);
+		}
+		input.close();
+	}
+
+	public void makeChance() throws FileNotFoundException{
+		Scanner input = new Scanner(new File("./resourcesChanceCards.txt"));
+
+		while(input.hasNextLine()){
+			tile = input.nextLine();
+			pool.add(tile);
+		}
+		input.close();
+	}
+
+	public String drawCard(){
+		Random rand = new Random();
+		int rItem = rand.nextInt(pool.size());
+		String randomCard = pool.get(rItem);
+		return randomCard;
+	}
 }

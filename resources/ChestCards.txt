@@ -1,0 +1,13 @@
+Receive for Services, 25
+Income Tax Refund, 20
+Inheritance, 100
+Sale of stock, 45
+Beauty Contest runner-up, 10
+Xmas Fund Matures, 100
+Life Insurance MAtures, 100
+Advance to Go, 200
+Bank Error in your Favour, 200
+Pay Hospital, -100
+Pay School Tax, -150
+Doctor's Fee, -50
+Bank Error against your Favour, -200
