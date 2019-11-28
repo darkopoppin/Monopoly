@@ -1,6 +1,5 @@
 0
 1,Brookside Drive,60,2,Purple
-2
 3,Edgarwood Drive,60,4,Purple
 4,Nuclear Power Station,200,20
 5,Heuston Station,200,25
