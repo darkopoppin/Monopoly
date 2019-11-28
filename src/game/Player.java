@@ -12,13 +12,15 @@ public class Player {
 	private int balance;
 	private int currPosition;
 	private int mortgageOwed;
-	private HashSet propertyOwned;
+	private HashSet<LandTile> propertyOwned;
+	private Boolean inJail;
 	
 	public Player(String playerName) {
 		//this.playerId = player;
 		this.playerName = playerName;
 		this.balance = 1500;
-		this.propertyOwned = new HashSet<LandTile>();
+		this.propertyOwned = new HashSet<>();
+		this.inJail = false;
 	}
 	public void action(){
 
@@ -29,16 +31,23 @@ public class Player {
 		// increasing bid prices
 	}
 	
-	public void rollDice(){
+	public Boolean rollDice(){
 		// Some random number between 2 - 12
 		Random r = new Random();		
-		int roll =  r.nextInt((12 - 2) + 1) + 2;
-		currPosition = currPosition + roll;
+		int dice1 =  r.nextInt((6 - 2) + 1) + 2;
+		int dice2 =  r.nextInt((6 - 2) + 1) + 2;
 
+		
+		currPosition = currPosition + dice1 + dice2;
+		
 		if(currPosition >= 40){
 			balance = balance + 200;
 			currPosition = currPosition - 40;
+			
 		}
+		if(dice1 == dice2){
+			return true;
+		} else {return false;}
 		
 	}
 
