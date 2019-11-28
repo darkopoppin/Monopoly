@@ -21,7 +21,7 @@ public class Property extends LandTile{
     public int calculateRent(){
         // Rent modifier given the houses
         if(houses != 0){
-        int rent = super.getRent();
+        rent = super.getRent();
         } 
         else if(houses == 1){
             rent = rent*5;

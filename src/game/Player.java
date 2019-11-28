@@ -14,15 +14,12 @@ public class Player {
 	private int mortgageOwed;
 	private HashSet propertyOwned;
 	
-	public Player(int playerId, String playerName, int balance, int currPosition, int mortgageOwed, HashMap propertyOwned) {
-		this.playerId = playerId;
+	public Player(String playerName) {
+		//this.playerId = player;
 		this.playerName = playerName;
-		this.balance = balance;
-		this.currPosition = currPosition;
-		this.mortgageOwed = mortgageOwed;
+		this.balance = 1500;
 		this.propertyOwned = new HashSet<>();
 	}
-
 	public void action(){
 
 	}
@@ -31,7 +28,7 @@ public class Player {
 
 	}
 	
-	public void rolldice(){
+	public void rollDice(){
 		// Some random number between 2 - 12
 		Random r = new Random();		
 		int roll =  r.nextInt((12 - 2) + 1) + 2;
