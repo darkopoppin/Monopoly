@@ -1,5 +1,4 @@
 package tiles;
-
 import game.Player;
 import game.Board;
 // import LandTile;

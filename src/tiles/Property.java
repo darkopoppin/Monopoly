@@ -14,18 +14,14 @@ public class Property extends LandTile{
 
     public void upgrade(){
         // Check of the player owns all properties in the same colourGroup => Increase house count
-        if(houses < 5){
-            
-            // Check the difference of number of houses between all properties in the same group is < 2
-            houses++;
-        };
+       houses++;
         
     }
 
     public int calculateRent(){
         // Rent modifier given the houses
         if(houses != 0){
-        int rent = super.getRent();
+        rent = super.getRent();
         } 
         else if(houses == 1){
             rent = rent*5;

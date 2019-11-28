@@ -16,7 +16,7 @@ public class GameEnvironment {
 	}
 	
 	public void start_game() { // when player click start game
-		this.board = makeBoard();
+		this.board = makeBoard(); //initialize board
 		
 	}
 	public Board makeBoard() {

@@ -1,7 +1,7 @@
 0
 1,Brookside Drive,60,2,Purple
 3,Edgarwood Drive,60,4,Purple
-4,Nuclear Power Station,200,20
+4,Nuclear Power Company,200,20
 5,Heuston Station,200,25
 6,Lafayette Street,100,6,Teal
 8,College Street,100,6,Teal
