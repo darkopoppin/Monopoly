@@ -18,7 +18,7 @@ public class Player {
 		//this.playerId = player;
 		this.playerName = playerName;
 		this.balance = 1500;
-		this.propertyOwned = new HashSet<>();
+		this.propertyOwned = new HashSet<LandTile>();
 	}
 	public void action(){
 
@@ -65,9 +65,10 @@ public class Player {
 		}
 		else if(rent > balance){
 			// Force the user to mortgage owned properties
-			if 
+			// Code here 
+
+			}
 		}
-	}
 
 	public void mortgage(){
 
