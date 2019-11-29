@@ -30,14 +30,7 @@ public class Player {
 	 *
 	 */
 	public void action(Tile tile){
-		switch(tile.getClassName()) {
-		case "LandTile":
-			LandTile landTile = (LandTile) tile;
-			if (landTile.getOwner() != null)
-				this.buyProperty(landTile);
-			else
-				this.payRent(landTile);
-		}
+
 	}
 
 	public void action(PoolTile poolTile) {
