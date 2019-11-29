@@ -1,5 +1,5 @@
 package game;
-
+import tiles.PooltTile;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,12 +22,14 @@ public class GameEnvironment {
 		this.board = makeBoard(); //initialize board
 		
 
-		while (this.player_array.size() != 1) { //while there are more than 1 player keep the game running
+		while (this.player_array.size() != 0) { //while there are more than 1 player keep the game running
 			for (Player player : this.player_array) { //each player turn
 				player.rollDice();
 				int position = player.getPosition();
 				LandTile tile = (LandTile) this.board.getPosition(position);
+				PoolTile tile1 = (PoolTile) this.board.getPosition(position);
 				player.action(tile);
+				
 			}
 		}
 		

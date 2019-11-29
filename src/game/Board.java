@@ -11,7 +11,7 @@ import tiles.*;
 
 public class Board {
 	private Map<Integer, Tile> landTiles;
-
+	private Map<Integer, PoolTile> poolTiles;
 	public Board () throws FileNotFoundException {
 		this.landTiles = new HashMap<>();
 		makeLandTiles();
@@ -67,7 +67,14 @@ public class Board {
 	}
 
 	public void makePoolTiles() throws FileNotFoundException {
-			
+		Scanner input = new Scanner(new File("./resources/CornerPoolTile.txt"));
+		
+		while(input.hasNext()) {
+			int x = input.nextInt();
+			PoolTile pool = new PoolTile(x);
+			poolTiles.put(x,pool);
+		}
+		
 		}
 
 	public Tile getPosition(int index) {

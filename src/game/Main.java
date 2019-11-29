@@ -7,6 +7,7 @@ public class Main {
 		Player host = new Player("player1");
 		GameEnvironment game = new GameEnvironment(host);
 		game.start_game();
+		
 	}
 	
 

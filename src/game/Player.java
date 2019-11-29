@@ -6,7 +6,7 @@ import tiles.Tile;
 
 import java.util.HashSet;
 import java.util.Random;
-
+import java.util.*; 
 
 public class Player {
 
@@ -29,7 +29,7 @@ public class Player {
 	 * action for landTile object
 	 *
 	 */
-	public void action(Tile tile){
+	/*public void action(Tile tile){
 		switch(tile.getClassName()) {
 		case "LandTile":
 			LandTile landTile = (LandTile) tile;
@@ -38,14 +38,34 @@ public class Player {
 			else
 				this.payRent(landTile);
 		}
+	}*/
+	
+	public void action(LandTile tile) {
+		try {
+			String type = tile.getClass().getName();
+			System.out.println(type);
+			
+			if (tile.getOwner() != null) {
+				System.out.println("paying rent");
+				this.payRent((LandTile)tile);
+				
+			} else {
+				System.out.println(tile.getOwner());
+				System.out.println("buying");
+				this.buyProperty((LandTile)tile);
+			}
+			
+		}catch(Exception e) {
+			System.out.println(e);
+		}
 	}
-
+	
 	public void action(PoolTile poolTile) {
-
+		poolTile.drawCard();
 	}
 
 	public void action(CornerTile cornerTile) {
-
+		System.out.println("CornerTile");
 	}
 
 	public void auction(){
@@ -60,7 +80,7 @@ public class Player {
 		int dice2 =  r.nextInt((6 - 2) + 1) + 2;
 
 
-		currPosition = currPosition + dice1 + dice2;
+		this.currPosition = this.currPosition + dice1 + dice2;
 
 		if(currPosition >= 40){
 			balance = balance + 200;
