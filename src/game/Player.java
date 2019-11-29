@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Player {
 
-	private int playerId;
+	//private int playerId; - not used at the moment 
 	private String playerName;
 	private int balance;
 	private int currPosition;
@@ -25,47 +25,28 @@ public class Player {
 		this.propertyOwned = new HashSet<>();
 		this.inJail = false;
 	}
+	
 	/*
-	 * action for landTile object
-	 *
+	 * Depending on the type of Tile
+	 * Buy a property, pay rent, draw a card from a pool
 	 */
-	/*public void action(Tile tile){
-		switch(tile.getClassName()) {
-		case "LandTile":
+	public <T extends Object> void action(T tile){
+		String name = tile.getClass().getName();
+		switch(tile.getClass().getName()) {
+		case "tiles.Property":
+		case "tiles.Utility":
+		case "tiles.Station":
 			LandTile landTile = (LandTile) tile;
-			if (landTile.getOwner() != null)
+			if (landTile.getOwner() == null)
 				this.buyProperty(landTile);
-			else
+			else if (landTile.getOwner() != this)
 				this.payRent(landTile);
+			break;
+	
+		case "tiles.PoolTile":
+			PoolTile poolTile = (PoolTile) tile;
+			poolTile.drawCard();
 		}
-	}*/
-
-	public void action(LandTile tile) {
-		try {
-			String type = tile.getClass().getName();
-			System.out.println(type);
-
-			if (tile.getOwner() != null) {
-				System.out.println("paying rent");
-				this.payRent((LandTile)tile);
-
-			} else {
-				System.out.println(tile.getOwner());
-				System.out.println("buying");
-				this.buyProperty((LandTile)tile);
-			}
-
-		}catch(Exception e) {
-			System.out.println(e);
-		}
-	}
-
-	public void action(PoolTile poolTile) {
-		poolTile.drawCard();
-	}
-
-	public void action(CornerTile cornerTile) {
-		System.out.println("CornerTile");
 	}
 
 	public void auction(){
@@ -87,7 +68,8 @@ public class Player {
 			currPosition = currPosition - 40;
 
 		}
-
+		
+		//later we will use it for jail
 		if(dice1 == dice2)
 			return true;
 		else
@@ -100,15 +82,14 @@ public class Player {
 
 	}
 
-	public void setBalance(int newBalance){
-		balance = newBalance;
-
+	public void changeBalance(int newBalance){
+		this.balance += newBalance;
 	}
 
 	public void buyProperty(LandTile p){
 		if(balance >= p.getValue()){
 			// ask for choice
-			setBalance(balance - p.getValue());
+			changeBalance(- p.getValue());
 			propertyOwned.add(p);
 			p.setOwner(this);
 		} else {
@@ -123,13 +104,14 @@ public class Player {
 		if(property.getMortgageStatus() == false){
 			int rent = property.getRent();
 			if(balance > rent){
-				// pay the rent
+				Player owner = property.getOwner();
+				changeBalance(-rent);
+				owner.changeBalance(rent);
 				}
 			else {
 				// Force the user to mortgage owned properties
 				// Make the player pick which properties to mortgage
 				// Automatically pay rent when the player finishes mortgaging properties
-				//
 
 				}
 			}
@@ -146,7 +128,17 @@ public class Player {
 		int due = property.getValue()/2;
 		balance = (int) (balance - due - due * 0.1);
 	}
-
+	
+	public void doCard(Tile tile) {
+		PoolTile poolTile = (PoolTile) tile;
+		String [] card = poolTile.drawCard();
+		int value = Integer.parseInt(card[1]);
+		//if the value of the card is 2 digits -> chest card
+		if (value >= 10 || value < -10) {
+			this.changeBalance(value);
+		}
+		
+	}
 	public int getBalance(){
 		return balance;
 	}
