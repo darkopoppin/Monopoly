@@ -31,22 +31,30 @@ public class Player {
 	 * Buy a property, pay rent, draw a card from a pool
 	 */
 	public <T extends Object> void action(T tile){
-		String name = tile.getClass().getName();
-		switch(tile.getClass().getName()) {
-		case "tiles.Property":
-		case "tiles.Utility":
-		case "tiles.Station":
-			LandTile landTile = (LandTile) tile;
-			if (landTile.getOwner() == null)
-				this.buyProperty(landTile);
-			else if (landTile.getOwner() != this)
-				this.payRent(landTile);
-			break;
+		//try because some of the positions on the board don't have objects yet
+		try {
+			String name = tile.getClass().getName();
+			switch(tile.getClass().getName()) {
+			case "tiles.Property":
+			case "tiles.Utility":
+			case "tiles.Station":
+				LandTile landTile = (LandTile) tile;
+				if (landTile.getOwner() == null)
+					this.buyProperty(landTile);
+				else if (landTile.getOwner() != this)
+					this.payRent(landTile);
+				break;
 	
-		case "tiles.PoolTile":
-			PoolTile poolTile = (PoolTile) tile;
-			poolTile.drawCard();
+			case "tiles.PoolTile":
+				PoolTile poolTile = (PoolTile) tile;
+				poolTile.drawCard();
+				break;
+			}
 		}
+		catch (NullPointerException e) {
+			
+		}
+
 	}
 
 	public void auction(){
