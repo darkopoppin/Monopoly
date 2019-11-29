@@ -11,7 +11,8 @@ public class Property extends LandTile{
         this.colourGroup = colourGroup;
 
     }
-
+    
+    
     public void upgrade(){
         // Check if the player owns all properties in the same colourGroup => Increase house count
        houses++;
