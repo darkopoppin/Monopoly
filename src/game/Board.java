@@ -10,17 +10,17 @@ import java.util.Scanner;
 import tiles.*;
 
 public class Board {
-	private Map<Integer, Tile> landTiles;
-	private Map<Integer, PoolTile> poolTiles;
+	private Map<Integer, Tile> tiles;
+	
 	public Board () throws FileNotFoundException {
-		this.landTiles = new HashMap<>();
+		this.tiles = new HashMap<>();
 		makeLandTiles();
 		makePoolTiles();
 	}
 	
 	/*
-	 * creates HashMap of LandTiles, that maps the position of a LandTile on the board
-	 * to the LandTile object
+	 * add Properties, Companies and Stations to the tiles map
+	 * (Key, Value) = (a position of a LandTile on the board, the object LandTile)
 	 */
 	public void makeLandTiles() throws FileNotFoundException {
 		//LandTile.txt contains property,station and utility attributes
@@ -28,14 +28,8 @@ public class Board {
 
 		while (input.hasNextLine()) {
 			String [] landTile = input.nextLine().split(",");
-			/*if (tile.length == 1){
-				id = Integer.parseInt(tile[0]);
-				if (id == 30){
-					initTile = new CornerTile(id);
-				}
-			}*/
+
 			// if the landTile has 5 tokens it's a property
-			//
 			if (landTile.length == 5) {
 				int id = Integer.parseInt(landTile[0]);
 				String name = landTile[1];
@@ -43,41 +37,48 @@ public class Board {
 				int rent = Integer.parseInt(landTile[3]);
 				
 				LandTile initTile = new Property(id, name, value, rent, landTile[4]);
-				this.landTiles.put(id, initTile);
+				this.tiles.put(id, initTile);
 			}
-			else if (landTile.length == 4 && landTile[1].contains("Station")){ //if the tile has 4 tokens its a station
+			// contains Station in the name
+			else if (landTile[1].contains("Station")){ //if the tile has 4 tokens its a station
 				int id = Integer.parseInt(landTile[0]);
 				String name = landTile[1];
 				int value = Integer.parseInt(landTile[2]);
 				int rent = Integer.parseInt(landTile[3]);
 				
 				LandTile initTile = new Station(id, name, value, rent);
-				this.landTiles.put(id, initTile);
+				this.tiles.put(id, initTile);
 			}
-			else if (landTile.length == 4 && landTile[1].contains("Company")) {
+			// if it contains Company in the name 
+			else if (landTile[1].contains("Company")) {
 				int id = Integer.parseInt(landTile[0]);
 				String name = landTile[1];
 				int value = Integer.parseInt(landTile[2]);
 				int rent = Integer.parseInt(landTile[3]);
 				
 				LandTile initTile = new Utility(id, name, value, rent);
-				this.landTiles.put(id, initTile);
+				this.tiles.put(id, initTile);
 			}
 		}
 	}
-
+	/*
+	 * adds PoolTiles to the tiles map 
+	 * (Key, Value) = (a position of a PoolTile on the board, the object PoolTile)
+	 */
 	public void makePoolTiles() throws FileNotFoundException {
-		Scanner input = new Scanner(new File("./resources/CornerPoolTile.txt"));
+		Scanner input = new Scanner(new File("./resources/PoolTiles.txt"));
 		
-		while(input.hasNext()) {
-			int x = input.nextInt();
-			PoolTile pool = new PoolTile(x);
-			poolTiles.put(x,pool);
+		while(input.hasNextLine()) {
+			int id = Integer.parseInt(input.nextLine());
+			PoolTile pool = new PoolTile(id);
+			this.tiles.put(id,pool);
 		}
 		
-		}
-
+	}
+	/*
+	 * returns the tile at the index
+	 */
 	public Tile getPosition(int index) {
-		return this.landTiles.get(index);
+		return this.tiles.get(index);
 	}
 }
