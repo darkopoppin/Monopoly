@@ -1,5 +1,6 @@
 0
 1,Brookside Drive,60,2,Purple
+2,Chest 
 3,Edgarwood Drive,60,4,Purple
 4,Nuclear Power Company,200,20
 5,Heuston Station,200,25
@@ -13,7 +14,7 @@
 14,Grant Avenue,160,12,Pink
 15,Westbury Station,200,25
 16,Windsor Court,180,14,Orange
-17
+17,Chest
 18,Walnut Avenue,180,14,Orange
 19,Lake Street,200,16,Orange
 20
@@ -29,7 +30,7 @@
 30
 31,Windsor Drive,300,26,Green
 32,Willow Lane,300,26,Green
-33
+33,Chest
 34,King Street,320,28,Green
 35,Old Town Station,200,25
 36

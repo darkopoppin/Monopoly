@@ -1,4 +1,4 @@
-package tiles;
+	package tiles;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -9,17 +9,17 @@ import java.util.Scanner;
 
 public class PoolTile extends Tile{
 
-	private String tile;
 	private ArrayList <String> pool;
 
 	public PoolTile(int id) throws FileNotFoundException{
 		super(id);
+		this.pool = new ArrayList<>();
+		//there are chests only at these positions
 		if(id==2 || id==17 || id ==33){
-			this.pool = new ArrayList<>();
 			makeChest();
 		}
+		//at all the other positions chances exist
 		else{
-			this.pool = new ArrayList<>();
 			makeChance();
 		}
 	}
@@ -28,26 +28,26 @@ public class PoolTile extends Tile{
 		Scanner input = new Scanner(new File("./resources/ChestCards.txt"));
 
 		while(input.hasNextLine()){
-			tile = input.nextLine();
-			pool.add(tile);
+			String card = input.nextLine();
+			pool.add(card);
 		}
 		input.close();
 	}
 
 	public void makeChance() throws FileNotFoundException{
-		Scanner input = new Scanner(new File("./resourcesChanceCards.txt"));
+		Scanner input = new Scanner(new File("./resources/ChanceCards.txt"));
 
 		while(input.hasNextLine()){
-			tile = input.nextLine();
-			pool.add(tile);
+			String card = input.nextLine();
+			pool.add(card);
 		}
 		input.close();
 	}
 
-	public String drawCard(){
+	public String [] drawCard(){
 		Random rand = new Random();
 		int rItem = rand.nextInt(pool.size());
 		String randomCard = pool.get(rItem);
-		return randomCard;
+		return randomCard.split(",");
 	}
 }

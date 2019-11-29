@@ -22,6 +22,5 @@ public class Station extends LandTile{
 		}
 		return false;
 	}
-=======
     }*/
 
