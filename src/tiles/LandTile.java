@@ -1,7 +1,8 @@
 package tiles;
 import game.Player;
 
-public abstract class LandTile extends Tile {
+public abstract class LandTile {
+	int id;
 	String name;
 	int value;
 	int rent;
@@ -10,7 +11,7 @@ public abstract class LandTile extends Tile {
 
 	
 	public LandTile(int id, String name, int value, int rent) {
-		super(id);
+		this.id = id;
 		this.name = name;
 		this.value = value;
 		this.rent = rent;

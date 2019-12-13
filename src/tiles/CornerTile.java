@@ -1,9 +1,10 @@
 package tiles;
 
-public class CornerTile extends Tile{
+public class CornerTile{
 	
+	int id;
 	public CornerTile(int id) {
-		super(id);
+		this.id = id;
 	}
 	
 }

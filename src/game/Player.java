@@ -2,7 +2,7 @@ package game;
 import tiles.CornerTile;
 import tiles.LandTile;
 import tiles.PoolTile;
-import tiles.Tile;
+
 
 import java.util.HashSet;
 import java.util.Random;
@@ -17,6 +17,7 @@ public class Player {
 	private int mortgageOwed;
 	private HashSet<LandTile> propertyOwned;
 	private Boolean inJail;
+	private int jailTime;
 
 	public Player(String playerName) {
 		//this.playerId = player;
@@ -24,39 +25,31 @@ public class Player {
 		this.balance = 1500;
 		this.propertyOwned = new HashSet<>();
 		this.inJail = false;
+		this.jailTime = 0;
 	}
 	
 	/*
-	 * Depending on the type of Tile
-	 * Buy a property, pay rent, draw a card from a pool
+	 * action for a LandTile such as Property, Station or Utility
 	 */
-	public <T extends Object> void action(T tile){
-		//try because some of the positions on the board don't have objects yet
-		try {
-			String name = tile.getClass().getName();
-			switch(tile.getClass().getName()) {
-			case "tiles.Property":
-			case "tiles.Utility":
-			case "tiles.Station":
-				LandTile landTile = (LandTile) tile;
-				if (landTile.getOwner() == null)
-					this.buyProperty(landTile);
-				else if (landTile.getOwner() != this)
-					this.payRent(landTile);
-				break;
-	
-			case "tiles.PoolTile":
-				PoolTile poolTile = (PoolTile) tile;
-				poolTile.drawCard();
-				break;
-			}
-		}
-		catch (NullPointerException e) {
-			
-		}
+	public void action(LandTile landTile){
+		Scanner input = new Scanner(System.in);
 
+		if (landTile.getOwner() == null) {
+			System.out.println("Buy the property?");
+			String respond = input.nextLine();
+			if (respond.equals("y"))
+				this.buyProperty(landTile);
+		}
+		else if (landTile.getOwner() != this)
+			this.payRent(landTile);
 	}
-
+	/*
+	 * action for a PoolTile
+	 */
+	public void action(PoolTile poolTile) {
+		this.doCard(poolTile);
+		
+	}
 	public void auction(){
 		// Auction between players
 		// increasing bid prices
@@ -68,14 +61,24 @@ public class Player {
 		int dice1 =  r.nextInt((6 - 2) + 1) + 2;
 		int dice2 =  r.nextInt((6 - 2) + 1) + 2;
 
-
-		this.currPosition = this.currPosition + dice1 + dice2;
-
-		if(currPosition >= 40){
-			balance = balance + 200;
-			currPosition = currPosition - 40;
-
+		if (this.inJail && (this.jailTime > 3 || dice1 == dice2)) {
+			this.inJail = false;
+			this.jailTime = 0;
+			this.currPosition = this.currPosition + dice1 + dice2;
 		}
+		else if (this.inJail) {
+			this.jailTime++;
+		}
+		else {
+			this.currPosition = this.currPosition + dice1 + dice2;
+			
+			if(currPosition >= 40){
+				balance = balance + 200;
+				currPosition = currPosition - 40;
+			}
+		}
+
+		
 		
 		//later we will use it for jail
 		if(dice1 == dice2)
@@ -137,14 +140,16 @@ public class Player {
 		balance = (int) (balance - due - due * 0.1);
 	}
 	
-	public void doCard(Tile tile) {
-		PoolTile poolTile = (PoolTile) tile;
+	public void doCard(PoolTile poolTile) {
 		String [] card = poolTile.drawCard();
 		int value = Integer.parseInt(card[1]);
 		//if the value of the card is 2 digits -> chest card
+		System.out.println(card[0]);
 		if (value >= 10 || value < -10) {
 			this.changeBalance(value);
 		}
+		else
+			this.currPosition = value;
 		
 	}
 	public int getBalance(){
@@ -158,5 +163,8 @@ public class Player {
 	public int getPosition() {
 		return this.currPosition;
 	}
-
+	
+	public void goToJail() {
+		this.inJail = true;
+	}
 }

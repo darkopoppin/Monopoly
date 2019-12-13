@@ -10,10 +10,13 @@ import java.util.Scanner;
 import tiles.*;
 
 public class Board {
-	private Map<Integer, Tile> tiles;
+	private Map<Integer, LandTile> landTiles;
+	private Map<Integer, PoolTile> poolTiles;
+	private final ArrayList<Integer> PoolTilesPosistion= new ArrayList<>();
 	
 	public Board () throws FileNotFoundException {
-		this.tiles = new HashMap<>();
+		this.landTiles = new HashMap<>();
+		this.poolTiles = new HashMap<>();
 		makeLandTiles();
 		makePoolTiles();
 	}
@@ -37,7 +40,7 @@ public class Board {
 				int rent = Integer.parseInt(landTile[3]);
 				
 				LandTile initTile = new Property(id, name, value, rent, landTile[4]);
-				this.tiles.put(id, initTile);
+				this.landTiles.put(id, initTile);
 			}
 			// contains Station in the name
 			else if (landTile[1].contains("Station")){ //if the tile has 4 tokens its a station
@@ -47,7 +50,7 @@ public class Board {
 				int rent = Integer.parseInt(landTile[3]);
 				
 				LandTile initTile = new Station(id, name, value, rent);
-				this.tiles.put(id, initTile);
+				this.landTiles.put(id, initTile);
 			}
 			// if it contains Company in the name 
 			else if (landTile[1].contains("Company")) {
@@ -57,7 +60,7 @@ public class Board {
 				int rent = Integer.parseInt(landTile[3]);
 				
 				LandTile initTile = new Utility(id, name, value, rent);
-				this.tiles.put(id, initTile);
+				this.landTiles.put(id, initTile);
 			}
 		}
 	}
@@ -71,14 +74,23 @@ public class Board {
 		while(input.hasNextLine()) {
 			int id = Integer.parseInt(input.nextLine());
 			PoolTile pool = new PoolTile(id);
-			this.tiles.put(id,pool);
+			this.poolTiles.put(id,pool);
+			this.PoolTilesPosistion.add(id);
 		}
 		
 	}
 	/*
 	 * returns the tile at the index
 	 */
-	public Tile getPosition(int index) {
-		return this.tiles.get(index);
+	public LandTile getLandTile(int index) {
+		return this.landTiles.get(index);
+	}
+	
+	public PoolTile getPoolTile(int index) {
+		return this.poolTiles.get(index);
+	}
+	
+	public ArrayList getPositions () {
+		return this.PoolTilesPosistion;
 	}
 }

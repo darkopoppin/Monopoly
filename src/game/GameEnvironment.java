@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import tiles.LandTile;
-import tiles.Tile;
 
 public class GameEnvironment {
 
@@ -23,14 +22,24 @@ public class GameEnvironment {
 	 */
 	public void start_game() { // when player click start game
 		this.board = makeBoard(); //initialize board
+		ArrayList PoolTilesPositions = this.board.getPositions();
 		
-
 		while (this.player_array.size() != 0) { //while there are more than 1 player keep the game running
 			for (Player player : this.player_array) { //each player's turn
 				player.rollDice();
 				int position = player.getPosition();
-				Tile tile = this.board.getPosition(position);
-				player.action(tile);	
+				//determine the type of Tile
+				if (PoolTilesPositions.contains(position)) {
+					PoolTile tile = this.board.getPoolTile(position);
+					player.action(tile);
+				}
+				else if (position == 30) {
+					player.goToJail();
+				}
+				else {
+					LandTile tile = this.board.getLandTile(position);
+					player.action(tile);
+				}
 			}
 		}
 		

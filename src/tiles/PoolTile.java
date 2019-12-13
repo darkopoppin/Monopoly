@@ -7,12 +7,12 @@ import java.util.Random;
 import java.util.Scanner;
 
 
-public class PoolTile extends Tile{
+public class PoolTile{
 
 	private ArrayList <String> pool;
-
+	int id;
 	public PoolTile(int id) throws FileNotFoundException{
-		super(id);
+		this.id = id;
 		this.pool = new ArrayList<>();
 		//there are chests only at these positions
 		if(id==2 || id==17 || id ==33){
